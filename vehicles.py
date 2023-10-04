@@ -12,20 +12,19 @@ app = FastAPI()
 
 
 class DistanceMatrixRequest(BaseModel):
-    matrix: List[List[int]]
+    matrix: List[List[float]]  # Cambia a List[List[float]]
     numVehicles: int
-
-
-class vehicleCapacitiesRequest(BaseModel):
-    matrix: List[int]
-
 
 # [START data_model]
 def create_data_model(distances, num_vehicles):
     """Stores the data for the problem."""
     data = {}
-    data["distance_matrix"] = distances.matrix
-    num_points = len(distances.matrix)
+    decimal_matrix = distances.matrix  # Obtén la matriz de distancias como números decimales
+    num_points = len(decimal_matrix)
+    
+    # Redondea los valores decimales a enteros
+    integer_matrix = [[int(value) for value in row] for row in decimal_matrix]
+    data["distance_matrix"] = decimal_matrix  # Almacena la matriz de enteros
     
     # Calculate the capacity per vehicle
     capacity_per_vehicle = num_points // num_vehicles
