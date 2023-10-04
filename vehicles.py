@@ -24,7 +24,7 @@ def create_data_model(distances, num_vehicles):
     
     # Redondea los valores decimales a enteros
     integer_matrix = [[int(value) for value in row] for row in decimal_matrix]
-    data["distance_matrix"] = decimal_matrix  # Almacena la matriz de enteros
+    data["distance_matrix"] = integer_matrix  # Almacena la matriz de enteros
     
     # Calculate the capacity per vehicle
     capacity_per_vehicle = num_points // num_vehicles
